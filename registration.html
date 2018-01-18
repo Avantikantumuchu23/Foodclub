@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Food</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<link href="http://cs99.bradley.edu/~akantumuchu/Assignment4/styles/layout.css" rel="stylesheet" type="text/css" media="all">
+<link rel="icon" href="http://cs99.bradley.edu/~akantumuchu/Assignment4/images/logo.png">
+<style>
+/* Modal Box
+----------------------------------------------------------------------------------------------------------------*/
+
+/* The Modal (background) */
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    padding-top: 10px; /* Location of the box */
+    left: 500px;
+    top: 140px;
+    width: 30%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgba(0,0,0,0); /* Black w/ opacity */
+}
+
+/* Modal Content */
+.modal-content {
+    position: relative;
+    background-color: #fefefe;
+    margin: auto;
+    padding: 0;
+    border: 1px solid #888;
+    width: 80%;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
+    -webkit-animation-name: animatetop;
+    -webkit-animation-duration: 0.4s;
+    animation-name: animatetop;
+    animation-duration: 0.4s
+}
+
+/* Add Animation */
+@-webkit-keyframes animatetop {
+    from {top:-300px; opacity:0} 
+    to {top:0; opacity:1}
+}
+
+@keyframes animatetop {
+    from {top:-300px; opacity:0}
+    to {top:0; opacity:1}
+}
+
+/* The Close Button */
+.close {
+    color: white;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.modal-header {
+    padding: 2px 6px;
+    background-color: #e60000;
+    color: white;
+}
+
+.modal-body {
+	padding: 2px 16px; 
+	align:center;
+}
+</style>
+<script>
+var user_pattern = /^[A-Za-z0-9 ]{3,20}$/;
+var email_pattern = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i
+var pass_pattern = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?!.*\s).*$/;
+var phone_pattern = /^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/;
+function svalidate1()
+{
+	if(myregister.username.value.length == 0)
+	{
+		document.getElementById("u").innerHTML = "Please enter UserName";
+	}
+	else if(!user_pattern.test(myregister.username.value))
+	{
+		document.getElementById("u").innerHTML = "Please Match Username Format";
+	}
+	else
+	{
+		document.getElementById("u").innerHTML = "";
+	}
+}
+function svalidate2()
+{
+	if(myregister.lastname.value.length == 0)
+	{
+		document.getElementById("l").innerHTML = "Please enter LastName";
+	}
+	else if(!user_pattern.test(myregister.lastname.value))
+	{
+		document.getElementById("l").innerHTML = "Please Match Username Format";
+	}
+	else
+	{
+		document.getElementById("l").innerHTML = "";
+	}
+}
+function svalidate3()
+{
+	if(myregister.Email.value.length == 0)
+	{
+		document.getElementById("e").innerHTML = "Please enter Email ID";
+	}
+	else if(!email_pattern.test(myregister.Email.value))
+	{
+		document.getElementById("e").innerHTML = "Please enter in Email ID format";
+	}
+	else
+	{
+		document.getElementById("e").innerHTML = "";
+	}
+}
+function svalidate4()
+{
+	if(myregister.password.value.length == 0)
+	{
+		document.getElementById("p").innerHTML = "Please enter Password";
+	}
+	else if(!pass_pattern.test(myregister.password.value))
+	{
+		document.getElementById("p").innerHTML = "Please match Password Pattern";
+	}
+	else
+	{
+		document.getElementById("p").innerHTML = "";
+	}
+}
+function svalidate5()
+{
+    var repeatpassword1=myregister.reenter.value.length;
+	var repeatpassword=myregister.reenter.value;
+	var password=myregister.password.value;
+	if(repeatpassword == 0){
+		document.getElementById("c").innerHTML = "Please Re-enter Password";
+	}
+	else if(!pass_pattern.test(repeatpassword)){
+		document.getElementById("c").innerHTML = "Please match Password Pattern";
+	}
+	else if(repeatpassword != password){
+	    document.getElementById("c").innerHTML = "Passwords Doesn't Match";
+	}
+	else{
+	    document.getElementById("c").innerHTML = "";
+	}
+	
+}
+function svalidate6()
+{
+     var ph1=myregister.phone.value;
+	if(myregister.phone.value.length == 0)
+		document.getElementById("n").innerHTML = "Please enter Phone Number";
+	else if(isNaN(myregister.phone.value) || ( myregister.phone.value.length != 10))
+		document.getElementById("n").innerHTML = "Please enter Valid phone number";
+	else
+	    document.getElementById("n").innerHTML = "";
+}
+function svalidate7()
+{
+var date1 = document.getElementById("date");
+var month1 = document.getElementById("month");
+var year1 = document.getElementById("year");
+if(date1.options[date1.selectedIndex].value <= 0)
+{
+document.getElementById("da").innerHTML = "Please select Date";
+}
+else
+{
+document.getElementById("da").innerHTML = "";
+}
+if(date1.options[month1.selectedIndex].value <= 0)
+{
+document.getElementById("mo").innerHTML = "Please select Month";
+}
+else
+{
+document.getElementById("mo").innerHTML = "";
+}
+if(date1.options[year1.selectedIndex].value <= 0)
+{
+document.getElementById("ye").innerHTML = "Please select Year";
+}
+else
+{
+document.getElementById("ye").innerHTML = "";
+}
+}
+function svalidate8()
+{
+	if(myregister.gender1.checked == 0 && myregister.gender0.checked == 0)
+	{
+		document.getElementById("ge1").innerHTML = "Please Select Gender";
+	}
+	else 
+	{
+	    document.getElementById("ge1").innerHTML = "";
+	}
+		
+	
+}
+function svalidate9()
+{
+	if(myregister.address.value.length == 0)
+		document.getElementById("ad").innerHTML = "Please enter Address";
+	else
+		document.getElementById("ad").innerHTML = "";
+}
+function svalidate10()
+{
+	  var x = document.getElementById("photo");
+	  if(x.value=="")
+	  document.getElementById("ph").innerHTML = "Please Upload photo";
+	  else
+	  document.getElementById("ph").innerHTML = "";
+}
+function svalidate11()
+{
+	if(myregister.photoname.value.length == 0)
+		document.getElementById("pn").innerHTML = "Please enter Photo Name";
+	else
+		document.getElementById("pn").innerHTML = "";
+}
+function svalidate12()
+{
+	if(myregister.agree.checked == 0)
+		document.getElementById("te").innerHTML = "Please Agree to the terms";
+	else
+		document.getElementById("te").innerHTML = "";
+}
+</script>
+<script>
+function login() {
+	var username = document.mylogin.username.value;
+	var password = document.mylogin.password.value;
+		if (username == "" && password == "") {
+			alert("Please enter Username and Password!!");
+			return false;
+        }
+		else if(username == ""){
+			alert("Please enter in Username field!!");
+			return false;
+		}
+        else if(password == ""){
+			alert("Please enter in Password field!!");
+			return false;
+		}
+
+   }
+</script>
+</head>
+<body id="top" style="background: linear-gradient(to bottom, #ff9999 0%, #ffffcc 100%);">
+<!-- ################################################################################################ -->
+<div class="wrapper row0">
+  <header id="header" class="clear"> 
+    <!-- ################################################################################################ -->
+    <div id="logo" class="fl_left">
+      <p style="font-size:18px;"><a href="index.html"><img src="http://cs99.bradley.edu/~akantumuchu/Assignment4/images/logo.png" style="width:75px;height:75px"></a><I><B>FOOD CLUB</B></I></p>
+	  </div>
+    <div class="fl_right">
+      <ul class="nospace inline">
+        <li style="padding-top:20px;"><a href="http://cs99.bradley.edu/~akantumuchu/Assignment4/registration.html" style="font-size:14px;">Register</a></li>
+        <li id="mylist" style="padding-top:20px;font-size:15px;"><a>Login</a></li>
+		</ul>
+    </div>
+	<div id="myModal" class="modal">
+
+  <!-- Modal content -->
+<div class="modal-content">
+    <div class="modal-header">
+      <span class="close">&times;</span>
+	  <h3 align="center">LOGIN</h3>
+    </div>
+	<div class="modal-body">
+	<form name="mylogin" action="/~akantumuchu/Assignment4/cgi-bin/login.cgi" onsubmit="return login()" method="post" enctype="multipart/form-data">
+	<table width="200" border="0" align="center">
+	<tr>
+	<td style="padding-left:5px;"><label style="color:White;">Username</label></td>
+	<td><input name="username" type="text" size="10" style="background-color:white;padding-left:20px" placeholder="User Name" /></td>                      
+	</tr>
+	<tr>
+	<td style="padding-left:5px;"><label style="color:White;">Password</label></td>
+	<td><input name="password" type="password" size="10" style="background-color:white;padding-left:20px" placeholder="Password" /></td>
+	</tr>
+    </table>
+	<div style="padding-left:130px;">
+	<input name="" type="submit" value="Login" style="background-color: #66ccff;color: white;display: inline-block;border: none;">   
+	</form>
+</div>
+</div>
+<script>
+// Get the modal
+var modal = document.getElementById('myModal');
+
+// Get the button that opens the modal
+var list = document.getElementById("mylist");
+
+// Get the <span> element that closes the modal
+var span = document.getElementsByClassName("close")[0];
+
+// When the user clicks the button, open the modal 
+list.onclick = function() {
+    modal.style.display = "block";
+}
+
+// When the user clicks on <span> (x), close the modal
+span.onclick = function() {
+    modal.style.display = "none";
+}
+</script>
+</form>
+    <!-- ################################################################################################ -->
+  </header>
+</div>
+<!-- ################################################################################################ -->
+<div class="wrapper row1">
+  <div id="topbar" class="clear"> 
+    <!-- ################################################################################################ -->
+    <nav id="mainav" class="fl_left">
+      <ul class="clear">
+        <li><a href="http://cs99.bradley.edu/~akantumuchu/Assignment4/index.html">Home</a></li>
+        <li><a href="http://cs99.bradley.edu/~akantumuchu/Assignment4/aboutus.html">About Us</a></li>
+        <li><a class="drop" href="#">MENU</a>
+		<ul>
+		    <li><a href="http://cs99.bradley.edu/~akantumuchu/Assignment4/dining.html">DINING IN</a></li>
+			<li><a href="http://cs99.bradley.edu/~akantumuchu/Assignment4/catering.html">CATERING</a></li>
+            <li><a href="http://cs99.bradley.edu/~akantumuchu/Assignment4/carryout.html">CARRY OUT</a></li>
+        </ul>
+		</li> 
+        <li><a class="drop" href="#">GAMES</a>
+		<ul>
+		    <li><a href="http://cs99.bradley.edu/~akantumuchu/Assignment4/Craps.html">CRAP GAME</a></li>
+            <li><a href="http://cs99.bradley.edu/~akantumuchu/Assignment4/drawing.html">DRAWING GAME</a></li>
+			<li><a href="http://cs99.bradley.edu/~akantumuchu/Assignment4/tictactoe.html">TIC TAC TOE</a></li>
+        </ul>
+		</li>
+		<li><a href="http://cs99.bradley.edu/~akantumuchu/Assignment4/table.html">Recipes</a></li>
+		<li><a href="http://cs99.bradley.edu/~akantumuchu/Assignment4/team.html">Team</a></li>
+		<li><a href="http://cs99.bradley.edu/~akantumuchu/Assignment4/contact.html">Contact Us</a></li>
+      </ul>
+    </nav>
+	<div id="time" style="margin-left:750px; color:#e60000">
+		</div>
+	<script type="text/javascript" src="http://cs99.bradley.edu/~akantumuchu/Assignment4/scripts/time.js"></script>
+    <!-- ################################################################################################ -->
+  </div>
+</div>
+</div>
+<form name="myregister" action="/~akantumuchu/Assignment4/cgi-bin/registration.cgi" onsubmit="" method="post" enctype="multipart/form-data">
+<table id="table" width="566" border="0" align="center" bordercolor="#000000">
+<tr>
+		<td colspan="2"><center><h1><strong>REGISTRATION FORM</strong></h1>
+		</center></td>
+	</tr>
+	<tr>
+		<td width="154" height="37"><strong>
+		<label>First Name<label style="color:red;">*</label></label>
+		</strong></td>
+		<td width="336"><input type="text" name="username" id="username" placeholder="enter User name" pattern="[A-Za-z]+" onblur="svalidate1()"/><span id="u" style="color:#ff0000;"></span> </td>
+	</tr>
+	<tr>
+		<td height="31"><strong>Last name<label style="color:red;">*</label</strong></td>
+		<td><input type="text" name="lastname" id="lastname" placeholder="enter last name" pattern="[A-Za-z]+" onblur="svalidate2()"/><span id="l" style="color:#ff0000;"></span></td>
+    </tr>
+	<tr>
+		<td height="36"><strong>
+        <label>Email<label style="color:red;">*</label</label>
+		</strong></td>
+		<td><input type="text" name="Email" id="Email" placeholder="enter your email id" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" onblur="svalidate3()"/><span id="e" style="color:#ff0000;"></span></td>
+	</tr>
+	<tr>
+		<td height="34"><strong>
+        <label>Password<label style="color:red;">*</label</label>
+		</strong></td>
+		<td><input type="password" name="password" id="password" placeholder="Format(A,a-z,1-9,!@#,8)" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" onblur="svalidate4()"/><span id="p" style="color:#ff0000;"></span></td>
+	</tr>
+	<tr>
+    <td height="36"><strong>
+      <label>Re-enter password<label style="color:red;">*</label</label>
+    </strong></td>
+    <td><input type="password" name="reenter" id="reenter" placeholder="Format(A,a-z,1-9,!@#,8)" onblur="svalidate5()"/><span id="c" style="color:#ff0000;"></span></td>
+	</tr>
+  <tr>
+		<td height="36"><strong>
+			<label>Mobile Number<label style="color:red;">*</label</label>
+		</strong></td>
+		<td><input type="text" name="phone" id="phone" placeholder="enter your mobile number" pattern="[0-9]{10}" onblur="svalidate6()"/><span id="n" style="color:#ff0000;"></span></td>
+	</tr>
+	<tr>
+    <td height="42"><strong>
+		<label>Birthday<label style="color:red;">*</label</label>
+		</strong></td>
+	<td><select name="date" id="date" onchange="javascript:svalidate7();">
+	  <option value="0">DATE</option>
+      <script language="javascript">
+			for(i=1;i<=31;i++)
+				document.write("<option>"+i+"</option>");
+	  </script>
+</select><span id="da" style="color:#ff0000;"></span>
+	<select name="month" id="month" onblur="svalidate7()">
+	  <option value="0">MONTH</option>
+	  <option value="JAN">JAN</option>
+	  <option value="FEB">FEB</option>
+	  <option value="MAR">MAR</option>
+	  <option value="APR">APR</option>
+	  <option value="MAY">MAY</option>
+	  <option value="JUN">JUN</option>
+	  <option value="JUL">JUL</option>
+      <option value="AUG">AUG</option>
+	  <option value="SEP">SEP</option>
+	  <option value="OCT">OCT</option>
+	  <option value="NOV">NOV</option>
+	  <option value="DEC">DEC</option>
+</select>
+    <span id="mo" style="color:#ff0000;"></span>
+	<select name="year" id="year" onblur="svalidate7()">
+	  <option value="0">YEAR</option>
+      <script language="javascript">
+			for(i=1970;i<=2010;i++)
+				document.write("<option>"+i+"</option>");
+	  </script>
+
+    </select><span id="ye" style="color:#ff0000;"></span></td>
+  </tr>
+  <tr>
+    <td height="67"><p><strong>Gender<label style="color:red;">*</label</strong></p></td>
+    <td>
+    <p>
+      <label>
+        <input type="radio" name="gender" value="male" id="gender1" onblur="svalidate8()"/>
+        <strong>Male</strong><span id="ge1" style="color:#ff0000;"></span></label>
+        <strong><br />
+      <label>
+        <input type="radio" name="gender" value="female" id="gender0" onblur="svalidate8()"/><span id="ge0" style="color:#800040;"></span>
+        Female</label>
+      </strong><br />
+    </p></td>
+  </tr>
+  <tr>
+    <td><strong>Address<label style="color:red;">*</label</strong></td>
+    <td><p>
+      <label for="address"></label>
+      <textarea name="address" id="address" cols="45" rows="5" placeholder="Enter your location" onblur="svalidate9()"></textarea><span id="ad" style="color:#ff0000;"></span>
+	  </p></td>
+  </tr>
+  <tr>
+    <td><strong>Upload Photo<label style="color:red;">*</label</strong></td>
+    <td><input type="file" name="photo" id="photo" onblur="svalidate10()"><span id="ph" style="color:#ff0000;"></span></td>
+  </tr>
+  <tr>
+    <td><strong>Photo Name<label style="color:red;">*</label</strong></td>
+    <td><input type="text" name="photoname" id="photoname" onblur="svalidate11()"/><span id="pn" style="color:#ff0000;"></span></td>
+  </tr>
+  <tr>
+    <td colspan="2"><strong>
+      <input type="checkbox" name="agree" id="agree" onChange="svalidate12()"/>
+    I agree to all terms and policies</strong><span id="te" style="color:#ff0000;"></span></td>
+  </tr>
+  <tr>
+    <td colspan="2"><center>
+      <strong>
+    <input type="submit" name="register" id="register" value="register" style="background-color:#66ccff;color: white;display: inline-block;border: none;" onclick=" return confirm('Are you sure want to submit the data???');"/>
+	</strong>
+    <input type="reset" name="clear" id="clear" value="Clear" style="background-color:#ff3333;color: white;display: inline-block;border: none;" onclick="return confirm('Are you sure want to reset the data???');" /></center>
+	</td>
+  </tr>
+</table>
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+</form>
+<footer>
+<div class="wrapper row2">
+  <div id="copyright" class="clear"> 
+    <!-- ################################################################################################ -->
+    <p class="fl_left"><b>Copyright &copy; 2017 - All Rights Reserved - </b><a href="http://cs99.bradley.edu/~akantumuchu/Assignment4/index.html"><b>Food Club</b></a></p>
+    <!-- ################################################################################################ -->
+  </div>
+</div>
+</footer>
+<script type="text/javascript" src="http://cs99.bradley.edu/~akantumuchu/Assignment4/scripts/time.js"></script>
+</body>
+</html>
